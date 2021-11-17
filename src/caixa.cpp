@@ -4,8 +4,10 @@ Licensed under the MIT License. See License file in the project root for license
 
 #include "caixa.hpp"
 
-Caixa::Caixa(Cpf cpf, std::string nome, float salario):
-                         Funcionario(cpf, nome, salario) {
+Caixa::Caixa(Cpf cpf, std::string nome,
+             float salario,
+             DiasDaSemana dia_do_pagamento):
+             Funcionario(cpf, nome, salario, dia_do_pagamento) {
 }
 
 float Caixa::bonificacao() const {

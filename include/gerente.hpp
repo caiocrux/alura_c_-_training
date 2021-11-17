@@ -10,10 +10,14 @@ Licensed under the MIT License. See License file in the project root for license
 #include "pessoa.hpp"
 #include "funcionario.hpp"
 #include "autenticavel.hpp"
+#include "dias_da_semana.hpp"
 
 class Gerente final: public Funcionario, public Autenticavel {
  public:
-    Gerente(Cpf cpf, std::string nome, float salario, std::string senha);
+    Gerente(Cpf cpf, std::string nome,
+            float salario,
+            std::string senha,
+            DiasDaSemana dia_do_pagamento);
     virtual float bonificacao() const;
 };
 #endif  // INCLUDE_GERENTE_HPP_

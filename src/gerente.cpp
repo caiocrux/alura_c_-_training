@@ -4,8 +4,12 @@ Licensed under the MIT License. See License file in the project root for license
 
 #include "gerente.hpp"
 
-Gerente::Gerente(Cpf cpf, std::string nome, float salario, std::string senha):
-                         Funcionario(cpf, nome, salario), Autenticavel(senha) {
+Gerente::Gerente(Cpf cpf,
+                 std::string nome,
+                 float salario,
+                 std::string senha,
+                 DiasDaSemana dia_do_pagamento):
+    Funcionario(cpf, nome, salario, dia_do_pagamento), Autenticavel(senha) {
 }
 
 float Gerente::bonificacao() const {

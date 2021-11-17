@@ -15,6 +15,7 @@ class Conta {
     void sacar(float valorASacar);
     virtual float get_retorna_taxa(void) const = 0;
     void depositar(float valorADepositar);
+    void operator+= (float valor);
     float retorna_saldo(void) const;
     void definir_numero_titular(std::string numero_titular);
     std::string get_numero_titular();

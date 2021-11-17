@@ -41,4 +41,5 @@ add_executable( alura_conta
                 include/titular.hpp
                 include/cpf.hpp
                 include/pessoa.hpp
+                include/dias_da_semana.hpp
                 include/funcionario.hpp )

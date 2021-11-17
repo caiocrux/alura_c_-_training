@@ -14,6 +14,7 @@ Licensed under the MIT License. See License file in the project root for license
 #include "caixa.hpp"
 #include "gerente.hpp"
 #include "autenticavel.hpp"
+#include "dias_da_semana.hpp"
 
 void version() {
   std::cout << "Version : " << SAMPLE_VERSION_MAJOR <<
@@ -46,16 +47,16 @@ int main(void) {
   std::cout << "abrindo conta corrente" << std::endl;
 
   ContaCorrente minha_conta("1374", titular);
-  Caixa func(cpf, "Caio Cruz ", 10000.00);
+  Caixa func(cpf, "Caio Cruz ", 10000.00, DiasDaSemana::Sabado);
   std::cout << "Minha bonificaao por ser caixa é de "
             << func.bonificacao() << std::endl;
-  Gerente func_1(cpf, "Caio Cruz ", 10000.00, "pipoca123");
+  Gerente func_1(cpf, "Caio Cruz ", 10000.00, "pipoca123", DiasDaSemana::Domingo);
   FazLogin(&func_1, "pipoca123");
   std::cout << "Minha bonificaao por ser gerente é de "
             << func_1.bonificacao() << std::endl;
 
-  minha_conta.depositar(350);
-  RealizarSaque(&minha_conta, 200);
+  minha_conta += 500;
+  //RealizarSaque(&minha_conta, 200);
   ExibeSaldo(minha_conta);
 
   std::cout << "abrindo conta poupança" << std::endl;
