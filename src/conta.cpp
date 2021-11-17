@@ -9,6 +9,7 @@ int Conta::numero_de_conta = 0;
 
 Conta::Conta(std::string numero, Titular titular):
     // Member Initializer Lists
+    m_titular(titular),
     numero(numero),
     saldo(0) {
     numero_de_conta++;
@@ -19,18 +20,20 @@ Conta::~Conta() {
     numero_de_conta--;
 }
 
-void Conta::sacar(float valorASacar) {
+std::pair <Conta::ResultadoDaOperacao,float> Conta::sacar(float valorASacar) {
     if (valorASacar < 0) {
             std::cout << "Não pode sacar valor negativo" << std::endl;
-            return;
+            return std::make_pair(VALOR_NEGATIVO, saldo);
         }
     float tarifaDeSaque = valorASacar * get_retorna_taxa();
     valorASacar += tarifaDeSaque;
     if (valorASacar > saldo) {
             std::cout << "Saldo insuficiente" << std::endl;
-            return;
-        }
-        saldo -= valorASacar;
+            return std::make_pair(SALDO_INSUFICIENTE, saldo);
+    }
+    saldo -= valorASacar;
+    return std::make_pair(SUCESSO, saldo);
+
 }
 
 void Conta::depositar(float valorADepositar) {

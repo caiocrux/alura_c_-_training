@@ -15,6 +15,7 @@ class Pessoa {
     std::string m_nome;
  public:
     Pessoa(Cpf cpf, std::string nome);
+    std::string retorna_nome(void) const;
  private:
     void verificar_nome_caracter();
 };

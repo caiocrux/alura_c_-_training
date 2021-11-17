@@ -26,9 +26,27 @@ void ExibeSaldo(const Conta& conta) {
     std::cout << "O saldo da Conta é " << conta.retorna_saldo() << std::endl;
 }
 
+std::ostream& operator<<(std::ostream& cout, const Conta& conta) {
+    Pessoa titular = conta.m_titular;
+    std::cout << " O saldo da conta é (operator) " << conta.retorna_saldo() <<
+    std::endl;
+    std::cout << "O titular da conta é " << titular.retorna_nome() << std::endl;
+}
 void RealizarSaque(Conta* conta, int valor) {
-    std::cout << "retirando " << valor << " da conta" << std::endl;
-    conta->sacar(valor);
+    /*std::cout << "retirando " << valor << " da conta" << std::endl;
+    std::cout << "foi sacado o valor de " << conta->sacar(valor).first << " ---"
+	      << std::endl;
+    */
+    auto res = conta->sacar(valor);
+    if (res.first == Conta::SUCESSO) {
+        std::cout << "Dinheiro sacado com sucesso !!" << std::endl;
+	std::cout << "Novo saldo é " << res.second << std::endl;
+    } else if( res.first == Conta::SALDO_INSUFICIENTE) {
+        std::cout << "Saldo Insuficiente !!" << std::endl;
+    } else if( res.first == Conta::VALOR_NEGATIVO) {
+        std::cout << "Saldo Insuficiente !!" << std::endl;
+    }
+
 }
 
 void FazLogin(Autenticavel* alguem, std::string senha) {
@@ -56,12 +74,15 @@ int main(void) {
             << func_1.bonificacao() << std::endl;
 
   minha_conta += 500;
-  //RealizarSaque(&minha_conta, 200);
+  RealizarSaque(&minha_conta, 100);
   ExibeSaldo(minha_conta);
-
+  std::cout << minha_conta;
   std::cout << "abrindo conta poupança" << std::endl;
   ContaCorrente outra_conta("1231", titular);
   outra_conta.depositar(350);
+  //Conta::ResultadoDaOperacao res = outra_conta.sacar(1).first;
+  auto res = outra_conta.sacar(13213131).first;
+  std::cout << "Resultado da operacao sacar: " << res << std::endl;
   RealizarSaque(&outra_conta, 200);
   outra_conta.transfere_dinheiro(&minha_conta, 100);
   ExibeSaldo(outra_conta);

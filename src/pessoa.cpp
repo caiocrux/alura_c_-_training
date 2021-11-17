@@ -9,6 +9,9 @@ Pessoa::Pessoa(Cpf cpf, std::string nome): m_cpf(cpf), m_nome(nome) {
         verificar_nome_caracter();
 }
 
+std::string Pessoa::retorna_nome(void) const{
+    return m_nome;
+}
 void Pessoa::verificar_nome_caracter() {
     if (m_nome.size() < 5) {
         std::cout << "Nome com o minimo de caracteres necessarios"

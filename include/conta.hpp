@@ -7,12 +7,19 @@ Licensed under the MIT License. See License file in the project root for license
 
 #include <string>
 #include <titular.hpp>
+#include <utility>
 
 class Conta {
  public:
+    enum ResultadoDaOperacao {
+        SUCESSO,
+	FALHA,
+	SALDO_INSUFICIENTE,
+	VALOR_NEGATIVO
+    };
     Conta(std::string numero, Titular titular);
     ~Conta();
-    void sacar(float valorASacar);
+    std::pair <ResultadoDaOperacao, float> sacar(float valorASacar);
     virtual float get_retorna_taxa(void) const = 0;
     void depositar(float valorADepositar);
     void operator+= (float valor);
@@ -20,9 +27,11 @@ class Conta {
     void definir_numero_titular(std::string numero_titular);
     std::string get_numero_titular();
     static int get_quantidade_contas();
+    friend std::ostream& operator<<(std::ostream& cout, const Conta& conta);
  private:
     static int numero_de_conta;
     std::string numero;
+    Titular m_titular;
  protected:
     float saldo = 0;
 };
