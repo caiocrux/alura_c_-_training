@@ -27,6 +27,7 @@ class Conta {
     void definir_numero_titular(std::string numero_titular);
     std::string get_numero_titular();
     static int get_quantidade_contas();
+    bool operator<(const Conta& Conta);
     friend std::ostream& operator<<(std::ostream& cout, const Conta& conta);
  private:
     static int numero_de_conta;

@@ -27,11 +27,12 @@ void ExibeSaldo(const Conta& conta) {
 }
 
 std::ostream& operator<<(std::ostream& cout, const Conta& conta) {
-    Pessoa titular = conta.m_titular;
+    Pessoa<Cpf> titular = conta.m_titular;
     std::cout << " O saldo da conta é (operator) " << conta.retorna_saldo() <<
     std::endl;
     std::cout << "O titular da conta é " << titular.retorna_nome() << std::endl;
 }
+
 void RealizarSaque(Conta* conta, int valor) {
     /*std::cout << "retirando " << valor << " da conta" << std::endl;
     std::cout << "foi sacado o valor de " << conta->sacar(valor).first << " ---"
@@ -57,29 +58,37 @@ void FazLogin(Autenticavel* alguem, std::string senha) {
     }
 }
 
+template <typename T>
+T Menor(T a, T b) {
+    return a < b ? a:b;
+}
 int main(void) {
   version();
   Cpf cpf("123.456.789-00");
   Titular titular(cpf, "Caio Felipe Cruz", "123pipoca");
+  Titular titular_2(cpf, "Caio Cruz", "123pipoca");
   FazLogin(&titular, "123pocorn");
-  std::cout << "abrindo conta corrente" << std::endl;
+  //std::cout << "abrindo conta corrente" << std::endl;
 
   ContaCorrente minha_conta("1374", titular);
   Caixa func(cpf, "Caio Cruz ", 10000.00, DiasDaSemana::Sabado);
-  std::cout << "Minha bonificaao por ser caixa é de "
-            << func.bonificacao() << std::endl;
+  // std::cout << "Minha bonificaao por ser caixa é de "
+  // << func.bonificacao() << std::endl;
   Gerente func_1(cpf, "Caio Cruz ", 10000.00, "pipoca123", DiasDaSemana::Domingo);
-  FazLogin(&func_1, "pipoca123");
-  std::cout << "Minha bonificaao por ser gerente é de "
-            << func_1.bonificacao() << std::endl;
+  // FazLogin(&func_1, "pipoca123");
+  // std::cout << "Minha bonificaao por ser gerente é de "
+  // << func_1.bonificacao() << std::endl;
 
   minha_conta += 500;
   RealizarSaque(&minha_conta, 100);
   ExibeSaldo(minha_conta);
-  std::cout << minha_conta;
-  std::cout << "abrindo conta poupança" << std::endl;
-  ContaCorrente outra_conta("1231", titular);
+  //std::cout << minha_conta;
+  //std::cout << "abrindo conta poupança" << std::endl;
+  ContaCorrente outra_conta("1231", titular_2);
   outra_conta.depositar(350);
+  //bool a = minha_conta < outra_conta;
+  std::cout << Menor<Conta&>(minha_conta, outra_conta) << std::endl;
+
   //Conta::ResultadoDaOperacao res = outra_conta.sacar(1).first;
   auto res = outra_conta.sacar(13213131).first;
   std::cout << "Resultado da operacao sacar: " << res << std::endl;
@@ -88,7 +97,7 @@ int main(void) {
   ExibeSaldo(outra_conta);
   ExibeSaldo(minha_conta);
 
-/*  
+/*
   ContaPoupanca* heap_conta = new  ContaPoupanca("424", titular);
   heap_conta->depositar(1000);
   RealizarSaque(*heap_conta, 500);

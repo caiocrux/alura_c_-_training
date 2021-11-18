@@ -10,7 +10,7 @@ Licensed under the MIT License. See License file in the project root for license
 #include "pessoa.hpp"
 #include "dias_da_semana.hpp"
 
-class Funcionario: public Pessoa {
+class Funcionario: public Pessoa<Cpf> {
  public:
     Funcionario(Cpf cpf,
                 std::string nome,

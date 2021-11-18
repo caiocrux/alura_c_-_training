@@ -7,16 +7,27 @@ Licensed under the MIT License. See License file in the project root for license
 
 #include <iostream>
 #include <string>
-#include "cpf.hpp"
+// #include "cpf.hpp"
 
+template <typename Documento>
 class Pessoa {
  protected :
-    Cpf m_cpf;
+    Documento documento;
     std::string m_nome;
  public:
-    Pessoa(Cpf cpf, std::string nome);
-    std::string retorna_nome(void) const;
+    Pessoa(Documento documento, std::string nome): documento(documento), m_nome(nome) {
+      verificar_nome_caracter();
+    }
+    std::string retorna_nome(void) const {
+      return m_nome;
+    }
  private:
-    void verificar_nome_caracter();
+    void verificar_nome_caracter() {
+      if (m_nome.size() < 5) {
+         std::cout << "Nome com o minimo de caracteres necessarios"
+         << std::endl;
+         exit(1);
+      }
+    }
 };
 #endif  // INCLUDE_PESSOA_HPP_

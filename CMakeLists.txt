@@ -28,7 +28,7 @@ add_executable( alura_conta
                 src/conta_corrente.cpp
                 src/titular.cpp
                 src/cpf.cpp
-                src/pessoa.cpp
+              # src/pessoa.cpp
                 src/funcionario.cpp
                 src/autenticavel.cpp
 

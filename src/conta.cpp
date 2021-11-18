@@ -20,6 +20,10 @@ Conta::~Conta() {
     numero_de_conta--;
 }
 
+bool Conta::operator<(const Conta& outra){
+   return (this->saldo < outra.saldo);
+}
+
 std::pair <Conta::ResultadoDaOperacao,float> Conta::sacar(float valorASacar) {
     if (valorASacar < 0) {
             std::cout << "Não pode sacar valor negativo" << std::endl;
